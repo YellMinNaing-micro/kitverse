@@ -23,7 +23,6 @@ $pendingOrders = (int)db()->query("SELECT COUNT(*) FROM orders WHERE order_statu
   <symbol id="a-box" viewBox="0 0 24 24"><path d="m12 2 9 4.5v11L12 22l-9-4.5v-11zM3 6.5 12 11l9-4.5M12 11v11"/></symbol>
   <symbol id="a-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20v-2c0-3 2.5-5 6-5s6 2 6 5v2zM17 5a3 3 0 0 1 0 6m1 2c2 0 3 2 3 5v2h-4"/></symbol>
   <symbol id="a-orders" viewBox="0 0 24 24"><path d="M5 3h14v18H5zM8 8h8M8 12h8M8 16h5"/></symbol>
-  <symbol id="a-chart" viewBox="0 0 24 24"><path d="M4 20V12h3v8zM10 20V7h3v13zM16 20V3h3v17z"/></symbol>
   <symbol id="a-card" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h5"/></symbol>
   <symbol id="a-alert" viewBox="0 0 24 24"><path d="m12 3 10 18H2zM12 9v5m0 3v.5"/></symbol>
   <symbol id="a-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="7.2"/><path d="m16.2 16.2 5 5"/></symbol>
@@ -31,7 +30,7 @@ $pendingOrders = (int)db()->query("SELECT COUNT(*) FROM orders WHERE order_statu
 </svg>
 <div class="admin-layout">
   <aside class="admin-sidebar">
-    <a class="admin-brand" href="<?=path('admin')?>" aria-label="KitVerse admin dashboard"><svg class="admin-brand-mark" viewBox="0 0 64 64" aria-hidden="true"><path fill="#f8fafc" d="m17 6 15 5L47 6l14 14-9 12-7-5v31H19V27l-7 5L3 20z"/><path fill="#0f172a" d="M25 10h14l-7 9z"/><path fill="#a3e635" d="M36 22 22 43h10l-5 14 18-24H34z"/></svg><span>Kit<strong>Verse</strong><small>ADMIN CONTROL</small></span></a>
+    <a class="admin-brand" href="<?=path('admin')?>" aria-label="KitVerse admin dashboard"><img class="admin-brand-logo" src="assets/kitverse-logo.png" alt=""><small>ADMIN CONTROL</small></a>
     <div class="admin-sidebar-label">STORE MANAGEMENT</div>
     <nav class="admin-side-nav" aria-label="Admin navigation">
       <?php foreach([
