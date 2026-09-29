@@ -28,7 +28,37 @@ if($_SERVER['REQUEST_METHOD']==='POST') {
  if($action==='checkout') { if(!current_user())redirect('login');$name=post('name');$phone=post('phone');$address=post('address');$method=post('payment_method');if(!$name||!$phone||!$address||!in_array($method,['cod','kbzpay','wavepay','ayapay'],true))throw new RuntimeException('Complete delivery and payment details.');db()->beginTransaction();try{$items=cart();if(!$items)throw new RuntimeException('Cart is empty.');foreach($items as $item){$s=db()->prepare('SELECT stock FROM product_variants WHERE id=? AND status=1 FOR UPDATE');$s->execute([$item['product_variant_id']]);$stock=$s->fetch();if(!$stock||!$item['product_status']||$stock['stock']<$item['quantity'])throw new RuntimeException($item['name'].' is unavailable in that quantity.');}[$base,$custom,$total]=totals($items);$number='KV-'.date('Ymd').'-'.strtoupper(bin2hex(random_bytes(4)));db()->prepare('INSERT INTO orders(user_id,order_no,customer_name,customer_email,phone,address,township,city,subtotal,customization_total,shipping_fee,total,payment_method,note) VALUES(?,?,?,?,?,?,?,?,?,?,0,?,?,?)')->execute([current_user()['id'],$number,$name,post('email')?:null,$phone,$address,post('township')?:null,post('city')?:null,$base,$custom,$total,$method,post('note')?:null]);$order=(int)db()->lastInsertId();$insert=db()->prepare('INSERT INTO order_items(order_id,product_variant_id,product_name,size,quantity,unit_price,custom_name,custom_number,customization_price,line_total) VALUES(?,?,?,?,?,?,?,?,?,?)');$reduce=db()->prepare('UPDATE product_variants SET stock=stock-? WHERE id=?');foreach($items as $item){$extra=$item['custom_name']!==null||$item['custom_number']!==null?5000:0;$insert->execute([$order,$item['product_variant_id'],$item['name'],$item['size'],$item['quantity'],$item['price'],$item['custom_name'],$item['custom_number'],$extra,((float)$item['price']+$extra)*$item['quantity']]);$reduce->execute([$item['quantity'],$item['product_variant_id']]);}db()->prepare('INSERT INTO payments(order_id,payment_method,amount) VALUES(?,?,?)')->execute([$order,$method,$total]);db()->prepare('INSERT INTO order_status_history(order_id,status,note) VALUES(?,"pending","Order placed")')->execute([$order]);db()->prepare('DELETE FROM cart_items WHERE user_id=?')->execute([current_user()['id']]);db()->commit();flash('Order '.$number.' placed successfully.');redirect('orders');}catch(Throwable $ex){db()->rollBack();throw $ex;} }
  if(str_starts_with($action,'admin_')) { if(!is_admin())throw new RuntimeException('Access denied.');
   if($action==='admin_order') { $status=post('status');if(!in_array($status,['pending','confirmed','processing','packed','shipped','delivered','cancelled'],true))throw new RuntimeException('Invalid status.');$id=(int)($_POST['id']??0);db()->beginTransaction();try{db()->prepare('UPDATE orders SET order_status=? WHERE id=?')->execute([$status,$id]);db()->prepare('INSERT INTO order_status_history(order_id,status) VALUES(?,?)')->execute([$id,$status]);db()->commit();}catch(Throwable $ex){db()->rollBack();throw $ex;}flash('Order updated.');redirect('admin',['tab'=>'orders']); }
-  if($action==='admin_product') { $id=(int)($_POST['id']??0);$name=post('name');$club=(int)($_POST['club_id']??0);$category=(int)($_POST['category_id']??0);$price=(float)($_POST['base_price']??0);if(!$name||$club<1||$category<1||$price<=0)throw new RuntimeException('Complete product details.');$values=[$club,$category,$name,post('season'),post('description'),$price,post('image'),isset($_POST['is_featured'])?1:0,isset($_POST['status'])?1:0];if($id)db()->prepare('UPDATE products SET club_id=?,category_id=?,name=?,season=?,description=?,base_price=?,image=?,is_featured=?,status=? WHERE id=?')->execute([...$values,$id]);else db()->prepare('INSERT INTO products(club_id,category_id,name,season,description,base_price,image,is_featured,status) VALUES(?,?,?,?,?,?,?,?,?)')->execute($values);flash('Product saved.');redirect('admin',['tab'=>'products']); }
+  if($action==='admin_product') {
+   require_once __DIR__.'/parts/product-image-upload.php';
+   $id=(int)($_POST['id']??0);$name=post('name');$club=(int)($_POST['club_id']??0);$category=(int)($_POST['category_id']??0);$price=(float)($_POST['base_price']??0);
+   if(!$name||$club<1||$category<1||$price<=0)throw new RuntimeException('Complete product details.');
+   $upload=$_FILES['product_image']??[];
+   $extension=product_image_extension($upload);
+   $oldImage=null;$newImage=null;
+   db()->beginTransaction();
+   try {
+    if($id){
+     $s=db()->prepare('SELECT image FROM products WHERE id=? FOR UPDATE');$s->execute([$id]);$row=$s->fetch();
+     if(!$row)throw new RuntimeException('Product not found.');
+     $oldImage=$row['image'];
+     db()->prepare('UPDATE products SET club_id=?,category_id=?,name=?,season=?,description=?,base_price=?,is_featured=?,status=? WHERE id=?')->execute([$club,$category,$name,post('season'),post('description'),$price,isset($_POST['is_featured'])?1:0,isset($_POST['status'])?1:0,$id]);
+    }else{
+     db()->prepare('INSERT INTO products(club_id,category_id,name,season,description,base_price,is_featured,status) VALUES(?,?,?,?,?,?,?,?)')->execute([$club,$category,$name,post('season'),post('description'),$price,isset($_POST['is_featured'])?1:0,isset($_POST['status'])?1:0]);
+     $id=(int)db()->lastInsertId();
+    }
+    if($extension!==null){
+     $newImage=save_product_image($upload,$id,$extension);
+     db()->prepare('UPDATE products SET image=? WHERE id=?')->execute([$newImage,$id]);
+    }
+    db()->commit();
+   }catch(Throwable $ex){
+    db()->rollBack();
+    if($newImage!==null)remove_replaced_product_image($newImage,$id);
+    throw $ex;
+   }
+   if($newImage!==null)remove_replaced_product_image($oldImage,$id);
+   flash('Product saved.');redirect('admin',['tab'=>'products','edit'=>$id]);
+  }
   if($action==='admin_variant') { $pid=(int)($_POST['product_id']??0);$size=post('size');$stock=(int)($_POST['stock']??-1);if($pid<1||!in_array($size,['XS','S','M','L','XL','XXL'],true)||$stock<0)throw new RuntimeException('Invalid variant.');$sku=post('sku')?:'KV-'.$pid.'-'.$size;$raw=post('price');$override=$raw===''?null:(float)$raw;db()->prepare('INSERT INTO product_variants(product_id,size,sku,price,stock,status) VALUES(?,?,?,?,?,1) ON DUPLICATE KEY UPDATE sku=VALUES(sku),price=VALUES(price),stock=VALUES(stock),status=1')->execute([$pid,$size,$sku,$override,$stock]);flash('Size and stock saved.');redirect('admin',['tab'=>'products','edit'=>$pid]); }
   if($action==='admin_catalog') { $type=post('type');$name=post('name');if(!$name)throw new RuntimeException('Name is required.');if($type==='clubs')db()->prepare('INSERT INTO clubs(league_id,name,status) VALUES(?,?,1)')->execute([(int)($_POST['league_id']??0),$name]);elseif($type==='leagues')db()->prepare('INSERT INTO leagues(name,country,status) VALUES(?,?,1)')->execute([$name,post('country')]);elseif($type==='categories')db()->prepare('INSERT INTO categories(name,description,status) VALUES(?,?,1)')->execute([$name,post('description')]);else throw new RuntimeException('Invalid catalog type.');flash('Catalog updated.');redirect('admin',['tab'=>'catalog']); }
  }
