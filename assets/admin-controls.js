@@ -95,3 +95,21 @@ if (productImageInput && productImagePreview) {
     productImagePreview.replaceChildren(image);
   });
 }
+
+const editSelected = document.querySelector('[data-edit-selected]');
+if (editSelected) {
+  const productRows = document.querySelectorAll('[data-product-row]');
+  productRows.forEach((row) => {
+    const radio = row.querySelector('input[name="selected_product"]');
+    radio.addEventListener('change', () => {
+      productRows.forEach((other) => other.classList.toggle('is-selected', other === row));
+      editSelected.disabled = false;
+      editSelected.dataset.productId = radio.value;
+    });
+  });
+  editSelected.addEventListener('click', () => {
+    if (editSelected.dataset.productId) {
+      window.location.href = `?page=admin&tab=products&edit=${encodeURIComponent(editSelected.dataset.productId)}`;
+    }
+  });
+}
