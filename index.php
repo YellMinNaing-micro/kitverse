@@ -61,7 +61,7 @@ if($_SERVER['REQUEST_METHOD']==='POST') {
     throw $ex;
    }
    if($newImage!==null)remove_replaced_product_image($oldImage,$id);
-   flash('Product saved.');redirect('admin',['tab'=>'products','edit'=>$id]);
+   flash('Product saved: '.$discount.'% discount, sale price '.price(discounted_price($price,$discount)).'.');redirect('admin',['tab'=>'products','edit'=>$id]);
   }
   if($action==='admin_variant') { $pid=(int)($_POST['product_id']??0);$size=post('size');$stock=(int)($_POST['stock']??-1);if($pid<1||!in_array($size,['XS','S','M','L','XL','XXL'],true)||$stock<0)throw new RuntimeException('Invalid variant.');$sku=post('sku')?:'KV-'.$pid.'-'.$size;$raw=post('price');$override=$raw===''?null:(float)$raw;db()->prepare('INSERT INTO product_variants(product_id,size,sku,price,stock,status) VALUES(?,?,?,?,?,1) ON DUPLICATE KEY UPDATE sku=VALUES(sku),price=VALUES(price),stock=VALUES(stock),status=1')->execute([$pid,$size,$sku,$override,$stock]);flash('Size and stock saved.');redirect('admin',['tab'=>'products','edit'=>$pid]); }
   if($action==='admin_catalog') { $type=post('type');$name=post('name');if(!$name)throw new RuntimeException('Name is required.');if($type==='clubs')db()->prepare('INSERT INTO clubs(league_id,name,status) VALUES(?,?,1)')->execute([(int)($_POST['league_id']??0),$name]);elseif($type==='leagues')db()->prepare('INSERT INTO leagues(name,country,status) VALUES(?,?,1)')->execute([$name,post('country')]);elseif($type==='categories')db()->prepare('INSERT INTO categories(name,description,status) VALUES(?,?,1)')->execute([$name,post('description')]);else throw new RuntimeException('Invalid catalog type.');flash('Catalog updated.');redirect('admin',['tab'=>'catalog']); }
