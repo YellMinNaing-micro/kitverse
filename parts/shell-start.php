@@ -8,8 +8,10 @@
   <link rel="stylesheet" href="assets/mockup.css">
   <link rel="stylesheet" href="assets/shop-filters.css">
   <link rel="stylesheet" href="assets/admin.css">
+  <link rel="stylesheet" href="assets/cart.css">
   <script src="assets/filters.js" defer></script>
   <script src="assets/admin-controls.js" defer></script>
+  <script src="assets/cart.js" defer></script>
 </head>
 <body>
 <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
