@@ -1,0 +1,20 @@
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+config.local.php
+*.log
+
+# Dependencies and generated files
+/vendor/
+/node_modules/
+/uploads/
+/tmp/
+/cache/
+/.idea/
+/.vscode/
+
+# Local database dumps may contain personal data
+*.sql.gz
+database/*private*.sql
+database/*backup*.sql
