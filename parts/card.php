@@ -3,7 +3,8 @@
     <?php if($product['image'] && is_file(__DIR__.'/../'.$product['image'])): ?>
       <img src="<?=e($product['image'])?>" alt="<?=e($product['name'])?>" loading="lazy">
     <?php else: ?>
-      <div class="mini-shirt"><span>KV</span><b>10</b></div>
+      <?php $kind = str_contains(strtolower($product['category']), 'away') ? 'away' : (str_contains(strtolower($product['category']), 'third') ? 'third' : 'home'); ?>
+      <img src="assets/jersey-<?=$kind?>.png" alt="<?=e($product['category'])?> jersey concept" loading="lazy">
     <?php endif; ?>
     <?php if($product['is_featured']): ?><span class="featured">FEATURED</span><?php endif; ?>
   </div>
