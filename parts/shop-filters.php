@@ -20,6 +20,7 @@ function filter_dropdown(string $name, string $allLabel, array $rows): void {
 ?>
 <form class="filters shop-filters" method="get" id="filters" role="search" aria-label="Filter jerseys">
   <input type="hidden" name="page" value="shop">
+  <?php if(($shopView??'all')!=='all'): ?><input type="hidden" name="view" value="<?=e($shopView)?>"><?php endif; ?>
   <label class="filter-search"><span class="sr-only">Search jerseys</span><svg aria-hidden="true"><use href="#i-search"/></svg><input type="search" name="q" placeholder="Search jerseys..." value="<?=e($_GET['q']??'')?>"></label>
   <?php filter_dropdown('league','All leagues',$leagues); ?>
   <?php filter_dropdown('club','All clubs',$clubs); ?>
