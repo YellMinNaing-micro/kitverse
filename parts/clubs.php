@@ -1,0 +1,4 @@
+<?php
+$clubRows = db()->query('SELECT cl.id,cl.name,l.name league,COUNT(p.id) kit_count FROM clubs cl JOIN leagues l ON l.id=cl.league_id LEFT JOIN products p ON p.club_id=cl.id AND p.status=1 WHERE cl.status=1 GROUP BY cl.id,cl.name,l.name ORDER BY l.name,cl.name')->fetchAll();
+?>
+<section class="wrap section clubs-page"><div class="page-title"><span class="eyebrow">FIND YOUR CLUB</span><h1>Shop by club<span class="dot">.</span></h1><p>Pick a team to see its available jerseys.</p></div><div class="clubs-grid"><?php foreach($clubRows as $club): ?><a class="club-tile" href="<?=path('shop',['club'=>$club['id']])?>"><span class="club-tile-icon"><svg><use href="#i-shirt"/></svg></span><span><strong><?=e($club['name'])?></strong><small><?=e($club['league'])?> · <?=e($club['kit_count'])?> kit<?=((int)$club['kit_count']===1?'':'s')?></small></span><b aria-hidden="true">→</b></a><?php endforeach; ?></div></section>
