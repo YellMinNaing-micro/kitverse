@@ -23,6 +23,7 @@ To create or reset a local admin login, run `C:\xampp\php\php.exe scripts\set_ad
 - Checkout with cash on delivery or manually confirmed digital payments
 - Order history and status tracking
 - Admin product, size, stock, category, league, club, and order management
+- Separate role-protected admin dashboard with sales, orders, customers, inventory, and payment views
 - Admin product image upload and replacement: JPG, PNG or WebP, up to 8 MB, saved under `assets/images/{productId}/`
 
 The generated hero and product concept images are under `assets/`. They are original visual placeholders for the sample catalog; they do not represent official club merchandise. Add your product photos through Admin → Products. Editing a product without choosing a new image keeps its current image; choosing a new one replaces it. Uploaded images are project files under `assets/images/`, so include them when deploying or backing up the catalog.
