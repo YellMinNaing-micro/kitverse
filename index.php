@@ -42,9 +42,9 @@ if($_SERVER['REQUEST_METHOD']==='POST') {
      $s=db()->prepare('SELECT image FROM products WHERE id=? FOR UPDATE');$s->execute([$id]);$row=$s->fetch();
      if(!$row)throw new RuntimeException('Product not found.');
      $oldImage=$row['image'];
-     db()->prepare('UPDATE products SET club_id=?,category_id=?,name=?,season=?,description=?,base_price=?,is_featured=?,status=? WHERE id=?')->execute([$club,$category,$name,post('season'),post('description'),$price,isset($_POST['is_featured'])?1:0,isset($_POST['status'])?1:0,$id]);
+     db()->prepare('UPDATE products SET club_id=?,category_id=?,name=?,season=?,description=?,base_price=?,is_featured=?,status=? WHERE id=?')->execute([$club,$category,$name,post('season'),post('description'),$price,post('is_featured')==='1'?1:0,post('status')==='1'?1:0,$id]);
     }else{
-     db()->prepare('INSERT INTO products(club_id,category_id,name,season,description,base_price,is_featured,status) VALUES(?,?,?,?,?,?,?,?)')->execute([$club,$category,$name,post('season'),post('description'),$price,isset($_POST['is_featured'])?1:0,isset($_POST['status'])?1:0]);
+     db()->prepare('INSERT INTO products(club_id,category_id,name,season,description,base_price,is_featured,status) VALUES(?,?,?,?,?,?,?,?)')->execute([$club,$category,$name,post('season'),post('description'),$price,post('is_featured')==='1'?1:0,post('status')==='1'?1:0]);
      $id=(int)db()->lastInsertId();
     }
     if($extension!==null){
