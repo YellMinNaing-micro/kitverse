@@ -28,6 +28,11 @@
 .admin .btn:focus-visible,.admin-tabs a:focus-visible{outline:3px solid #a3e635;outline-offset:2px}
 .admin .check{font-size:12px;font-weight:700;color:#344759}
 .admin .check input{accent-color:#82b91f}
+.product-image-preview{display:grid;place-items:center;min-height:210px;overflow:hidden;background:#f4f7f9;border:1px dashed #cbd9df;border-radius:14px;color:#81919d;font-size:13px;font-weight:700}
+.product-image-preview img{display:block;width:100%;height:210px;object-fit:contain}
+.admin .form input[type=file]{padding:10px;background:#fff;cursor:pointer}
+.admin .form input[type=file]::file-selector-button{margin-right:12px;padding:8px 12px;border:1px solid #c8d8df;border-radius:8px;background:#edf4f6;color:#172638;font-weight:700;cursor:pointer}
+.image-upload-hint{display:block;margin-top:-6px;color:#718292;font-size:11px;line-height:1.5}
 .catalog-list p{padding:11px 2px;color:#405467}
 .order-admin{gap:18px}
 .order-admin>div{min-width:0}
