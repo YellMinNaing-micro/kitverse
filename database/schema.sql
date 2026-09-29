@@ -190,6 +190,7 @@ CREATE TABLE `products` (
   `season` varchar(20) DEFAULT NULL,
   `description` text DEFAULT NULL,
   `base_price` decimal(12,2) NOT NULL DEFAULT 0.00,
+  `discount_percent` tinyint(3) unsigned NOT NULL DEFAULT 0,
   `image` varchar(255) DEFAULT NULL,
   `is_featured` tinyint(1) NOT NULL DEFAULT 0,
   `status` tinyint(1) NOT NULL DEFAULT 1,
