@@ -15,6 +15,7 @@ $pendingOrders = (int)db()->query("SELECT COUNT(*) FROM orders WHERE order_statu
   <link rel="stylesheet" href="assets/admin.css">
   <link rel="stylesheet" href="assets/admin-dashboard.css">
   <link rel="stylesheet" href="assets/admin-tables.css">
+  <link rel="stylesheet" href="assets/account-orders.css">
   <script src="assets/admin-controls.js" defer></script>
 </head>
 <body class="admin-body">
@@ -50,7 +51,7 @@ $pendingOrders = (int)db()->query("SELECT COUNT(*) FROM orders WHERE order_statu
         <form class="admin-header-search" method="get"><input type="hidden" name="page" value="admin"><input type="hidden" name="tab" value="products"><svg><use href="#a-search"/></svg><input type="search" name="q" value="<?=e($_GET['q']??'')?>" placeholder="Search products..." aria-label="Search products"></form>
         <a class="admin-notification" href="<?=path('admin',['tab'=>'orders'])?>" aria-label="<?=e($pendingOrders)?> pending orders"><svg><use href="#a-orders"/></svg><?php if($pendingOrders): ?><b><?=e($pendingOrders)?></b><?php endif; ?></a>
         <div class="admin-profile"><span class="admin-avatar"><?=e(mb_strtoupper(mb_substr(current_user()['name']??'A',0,1)))?></span><span><strong><?=e(current_user()['name']??'Admin')?></strong><small>Store Admin</small></span></div>
-        <form method="post" class="admin-logout"><input type="hidden" name="csrf" value="<?=token()?>"><input type="hidden" name="action" value="logout"><button type="submit" aria-label="Sign out" title="Sign out"><svg><use href="#a-logout"/></svg></button></form>
+        <form method="post" class="admin-logout"><input type="hidden" name="csrf" value="<?=token()?>"><input type="hidden" name="action" value="logout"><button type="submit" aria-label="Log out" title="Log out"><svg><use href="#a-logout"/></svg><span>Log out</span></button></form>
       </div>
     </header>
     <?php if($message): ?><div class="admin-flash success"><?=e($message)?></div><?php endif; ?>
