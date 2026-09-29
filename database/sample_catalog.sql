@@ -13,31 +13,18 @@ INSERT INTO `categories` VALUES (1,'Home Kit','Home football jerseys',1,'2026-09
 INSERT INTO `categories` VALUES (2,'Away Kit','Away football jerseys',1,'2026-09-29 04:32:02');
 INSERT INTO `categories` VALUES (3,'Third Kit','Third football jerseys',1,'2026-09-29 04:32:02');
 INSERT INTO `categories` VALUES (4,'Retro Kit','Classic and retro football jerseys',1,'2026-09-29 04:32:02');
-INSERT INTO `categories` VALUES (5,'Home Kit','Official-style home football jerseys',1,'2026-09-29 04:32:21');
-INSERT INTO `categories` VALUES (6,'Away Kit','Away football jerseys',1,'2026-09-29 04:32:21');
-INSERT INTO `categories` VALUES (7,'Third Kit','Third football jerseys',1,'2026-09-29 04:32:21');
-INSERT INTO `categories` VALUES (8,'Retro Kit','Classic retro football jerseys',1,'2026-09-29 04:32:21');
 
 INSERT INTO `leagues` VALUES (1,'Premier League','England',NULL,1,'2026-09-29 04:32:02');
 INSERT INTO `leagues` VALUES (2,'La Liga','Spain',NULL,1,'2026-09-29 04:32:02');
 INSERT INTO `leagues` VALUES (3,'Serie A','Italy',NULL,1,'2026-09-29 04:32:02');
 INSERT INTO `leagues` VALUES (4,'Bundesliga','Germany',NULL,1,'2026-09-29 04:32:02');
-INSERT INTO `leagues` VALUES (5,'Premier League','England','uploads/leagues/premier-league.png',1,'2026-09-29 04:32:21');
-INSERT INTO `leagues` VALUES (6,'La Liga','Spain','uploads/leagues/la-liga.png',1,'2026-09-29 04:32:21');
-INSERT INTO `leagues` VALUES (7,'Serie A','Italy','uploads/leagues/serie-a.png',1,'2026-09-29 04:32:21');
-INSERT INTO `leagues` VALUES (8,'Bundesliga','Germany','uploads/leagues/bundesliga.png',1,'2026-09-29 04:32:21');
 
 INSERT INTO `clubs` VALUES (1,1,'Manchester United',NULL,1,'2026-09-29 04:32:02');
 INSERT INTO `clubs` VALUES (2,1,'Liverpool',NULL,1,'2026-09-29 04:32:02');
 INSERT INTO `clubs` VALUES (3,1,'Arsenal',NULL,1,'2026-09-29 04:32:02');
 INSERT INTO `clubs` VALUES (4,2,'Real Madrid',NULL,1,'2026-09-29 04:32:02');
 INSERT INTO `clubs` VALUES (5,2,'Barcelona',NULL,1,'2026-09-29 04:32:02');
-INSERT INTO `clubs` VALUES (6,1,'Manchester United','uploads/clubs/manchester-united.png',1,'2026-09-29 04:32:21');
-INSERT INTO `clubs` VALUES (7,1,'Liverpool','uploads/clubs/liverpool.png',1,'2026-09-29 04:32:21');
-INSERT INTO `clubs` VALUES (8,1,'Arsenal','uploads/clubs/arsenal.png',1,'2026-09-29 04:32:21');
 INSERT INTO `clubs` VALUES (9,1,'Chelsea','uploads/clubs/chelsea.png',1,'2026-09-29 04:32:21');
-INSERT INTO `clubs` VALUES (10,2,'Real Madrid','uploads/clubs/real-madrid.png',1,'2026-09-29 04:32:21');
-INSERT INTO `clubs` VALUES (11,2,'Barcelona','uploads/clubs/barcelona.png',1,'2026-09-29 04:32:21');
 INSERT INTO `clubs` VALUES (12,2,'Atletico Madrid','uploads/clubs/atletico-madrid.png',1,'2026-09-29 04:32:21');
 INSERT INTO `clubs` VALUES (13,3,'AC Milan','uploads/clubs/ac-milan.png',1,'2026-09-29 04:32:21');
 INSERT INTO `clubs` VALUES (14,3,'Inter Milan','uploads/clubs/inter-milan.png',1,'2026-09-29 04:32:21');
@@ -49,16 +36,16 @@ INSERT INTO `products` VALUES (1,1,1,'Manchester United Home Jersey','2026/27','
 INSERT INTO `products` VALUES (2,1,2,'Manchester United Away Jersey','2026/27','Modern away football jersey with lightweight fabric.',82000.00,'uploads/products/man-utd-away.jpg',0,1,'2026-09-29 04:32:21','2026-09-29 04:32:21');
 INSERT INTO `products` VALUES (3,2,1,'Liverpool Home Jersey','2026/27','Liverpool inspired home jersey designed for football fans.',85000.00,'uploads/products/liverpool-home.jpg',1,1,'2026-09-29 04:32:21','2026-09-29 04:32:21');
 INSERT INTO `products` VALUES (4,3,1,'Arsenal Home Jersey','2026/27','Arsenal inspired home kit with comfortable fit.',83000.00,'uploads/products/arsenal-home.jpg',1,1,'2026-09-29 04:32:21','2026-09-29 04:32:21');
-INSERT INTO `products` VALUES (5,5,1,'Real Madrid Home Jersey','2026/27','Premium white football jersey inspired by Madrid.',90000.00,'uploads/products/real-madrid-home.jpg',1,1,'2026-09-29 04:32:21','2026-09-29 04:32:21');
-INSERT INTO `products` VALUES (6,5,3,'Real Madrid Third Jersey','2026/27','Dark third jersey with modern football styling.',88000.00,'uploads/products/real-madrid-third.jpg',0,1,'2026-09-29 04:32:21','2026-09-29 04:32:21');
-INSERT INTO `products` VALUES (7,6,1,'Barcelona Home Jersey','2026/27','Classic blue and red football jersey.',90000.00,'uploads/products/barcelona-home.jpg',1,1,'2026-09-29 04:32:21','2026-09-29 04:32:21');
-INSERT INTO `products` VALUES (8,6,2,'Barcelona Away Jersey','2026/27','Modern Barcelona inspired away football shirt.',87000.00,'uploads/products/barcelona-away.jpg',0,1,'2026-09-29 04:32:21','2026-09-29 04:32:21');
-INSERT INTO `products` VALUES (9,8,1,'AC Milan Home Jersey','2026/27','Red and black football jersey inspired by Milan.',82000.00,'uploads/products/ac-milan-home.jpg',0,1,'2026-09-29 04:32:21','2026-09-29 04:32:21');
-INSERT INTO `products` VALUES (10,10,1,'Juventus Home Jersey','2026/27','Black and white striped football jersey.',81000.00,'uploads/products/juventus-home.jpg',0,1,'2026-09-29 04:32:21','2026-09-29 04:32:21');
-INSERT INTO `products` VALUES (11,11,1,'Bayern Munich Home Jersey','2026/27','Red home football jersey inspired by Munich.',84000.00,'uploads/products/bayern-home.jpg',1,1,'2026-09-29 04:32:21','2026-09-29 04:32:21');
-INSERT INTO `products` VALUES (12,12,1,'Dortmund Home Jersey','2026/27','Bright yellow football jersey inspired by Dortmund.',80000.00,'uploads/products/dortmund-home.jpg',0,1,'2026-09-29 04:32:21','2026-09-29 04:32:21');
+INSERT INTO `products` VALUES (5,4,1,'Real Madrid Home Jersey','2026/27','Premium white football jersey inspired by Madrid.',90000.00,'uploads/products/real-madrid-home.jpg',1,1,'2026-09-29 04:32:21','2026-09-29 04:51:08');
+INSERT INTO `products` VALUES (6,4,3,'Real Madrid Third Jersey','2026/27','Dark third jersey with modern football styling.',88000.00,'uploads/products/real-madrid-third.jpg',0,1,'2026-09-29 04:32:21','2026-09-29 04:51:08');
+INSERT INTO `products` VALUES (7,5,1,'Barcelona Home Jersey','2026/27','Classic blue and red football jersey.',90000.00,'uploads/products/barcelona-home.jpg',1,1,'2026-09-29 04:32:21','2026-09-29 04:51:08');
+INSERT INTO `products` VALUES (8,5,2,'Barcelona Away Jersey','2026/27','Modern Barcelona inspired away football shirt.',87000.00,'uploads/products/barcelona-away.jpg',0,1,'2026-09-29 04:32:21','2026-09-29 04:51:08');
+INSERT INTO `products` VALUES (9,13,1,'AC Milan Home Jersey','2026/27','Red and black football jersey inspired by Milan.',82000.00,'uploads/products/ac-milan-home.jpg',0,1,'2026-09-29 04:32:21','2026-09-29 04:51:08');
+INSERT INTO `products` VALUES (10,15,1,'Juventus Home Jersey','2026/27','Black and white striped football jersey.',81000.00,'uploads/products/juventus-home.jpg',0,1,'2026-09-29 04:32:21','2026-09-29 04:51:08');
+INSERT INTO `products` VALUES (11,16,1,'Bayern Munich Home Jersey','2026/27','Red home football jersey inspired by Munich.',84000.00,'uploads/products/bayern-home.jpg',1,1,'2026-09-29 04:32:21','2026-09-29 04:51:08');
+INSERT INTO `products` VALUES (12,17,1,'Dortmund Home Jersey','2026/27','Bright yellow football jersey inspired by Dortmund.',80000.00,'uploads/products/dortmund-home.jpg',0,1,'2026-09-29 04:32:21','2026-09-29 04:51:08');
 INSERT INTO `products` VALUES (13,1,4,'Manchester United Retro Jersey','1998/99','Classic retro-style jersey for collectors and fans.',95000.00,'uploads/products/man-utd-retro.jpg',1,1,'2026-09-29 04:32:21','2026-09-29 04:32:21');
-INSERT INTO `products` VALUES (14,5,4,'Real Madrid Retro Jersey','2001/02','Classic Madrid-inspired retro football shirt.',98000.00,'uploads/products/real-madrid-retro.jpg',0,1,'2026-09-29 04:32:21','2026-09-29 04:32:21');
+INSERT INTO `products` VALUES (14,4,4,'Real Madrid Retro Jersey','2001/02','Classic Madrid-inspired retro football shirt.',98000.00,'uploads/products/real-madrid-retro.jpg',0,1,'2026-09-29 04:32:21','2026-09-29 04:51:08');
 
 INSERT INTO `product_variants` VALUES (1,1,'S','KV-MUN-HOME-2627-S',85000.00,8,1,'2026-09-29 04:32:21');
 INSERT INTO `product_variants` VALUES (2,1,'M','KV-MUN-HOME-2627-M',85000.00,12,1,'2026-09-29 04:32:21');
