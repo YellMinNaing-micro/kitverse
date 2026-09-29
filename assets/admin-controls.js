@@ -21,6 +21,7 @@ document.querySelectorAll('.admin select').forEach((select, index) => {
 
   const options = document.createElement('div');
   options.className = 'admin-select-options';
+  options.setAttribute('popover', 'manual');
   options.setAttribute('role', 'group');
   options.setAttribute('aria-label', name.replaceAll('_', ' '));
   Array.from(select.options).forEach((option) => {
@@ -44,11 +45,37 @@ document.querySelectorAll('.admin select').forEach((select, index) => {
   select.disabled = true;
   select.hidden = true;
 
+  const positionOptions = () => {
+    const anchor = summary.getBoundingClientRect();
+    options.style.minWidth = `${anchor.width}px`;
+    options.style.maxHeight = `${Math.min(245, window.innerHeight - 16)}px`;
+    const width = Math.max(anchor.width, options.offsetWidth);
+    const height = options.offsetHeight;
+    const left = Math.max(8, Math.min(anchor.left, window.innerWidth - width - 8));
+    const below = window.innerHeight - anchor.bottom;
+    const top = below >= height + 8 || below >= anchor.top
+      ? anchor.bottom + 6
+      : anchor.top - height - 6;
+    options.style.left = `${left}px`;
+    options.style.top = `${Math.max(8, top)}px`;
+  };
+
   menu.addEventListener('toggle', () => {
-    if (menu.open) document.querySelectorAll('.admin-select[open]').forEach((other) => {
-      if (other !== menu) other.open = false;
-    });
+    if (menu.open) {
+      document.querySelectorAll('.admin-select[open]').forEach((other) => {
+        if (other !== menu) other.open = false;
+      });
+      options.showPopover?.();
+      positionOptions();
+    } else if (options.matches(':popover-open')) {
+      options.hidePopover();
+    }
   });
+  window.addEventListener('resize', () => { if (menu.open) positionOptions(); });
+  document.addEventListener('scroll', (event) => {
+    if (!menu.open || options.contains(event.target)) return;
+    menu.open = false;
+  }, true);
   menu.addEventListener('change', (event) => {
     if (!(event.target instanceof HTMLInputElement)) return;
     value.value = event.target.value;
