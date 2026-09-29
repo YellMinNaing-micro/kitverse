@@ -14,6 +14,7 @@ $pendingOrders = (int)db()->query("SELECT COUNT(*) FROM orders WHERE order_statu
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/admin.css">
   <link rel="stylesheet" href="assets/admin-dashboard.css">
+  <link rel="stylesheet" href="assets/admin-tables.css">
   <script src="assets/admin-controls.js" defer></script>
 </head>
 <body class="admin-body">
