@@ -8,13 +8,14 @@ function path(string $page='home', array $extra=[]): string { return '?'.http_bu
 function redirect(string $page='home', array $extra=[]): never { header('Location: '.path($page,$extra)); exit; }
 function token(): string { return $_SESSION['csrf'] ??= bin2hex(random_bytes(24)); }
 function current_user(): ?array { return $_SESSION['user']??null; }
-function is_admin(): bool { return (current_user()['role']??'')==='admin'; }
+function is_admin(): bool { $user=current_user();if(($user['role']??'')!=='admin')return false;static $allowed=null;if($allowed===null){$s=db()->prepare("SELECT 1 FROM users WHERE id=? AND role='admin' AND status=1");$s->execute([(int)$user['id']]);$allowed=(bool)$s->fetchColumn();}return $allowed; }
 function owner(): array { return current_user()?['user_id',current_user()['id']]:['session_id',session_id()]; }
 function cart(): array { [$key,$value]=owner(); $s=db()->prepare("SELECT ci.*,v.size,v.stock,COALESCE(v.price,p.base_price) price,p.name,p.image,p.id product_id,p.status product_status,v.status variant_status FROM cart_items ci JOIN product_variants v ON v.id=ci.product_variant_id JOIN products p ON p.id=v.product_id WHERE ci.$key=? ORDER BY ci.id DESC");$s->execute([$value]);return $s->fetchAll(); }
 function totals(array $cart): array { $base=$custom=0;foreach($cart as $item){$base+=(float)$item['price']*$item['quantity'];$custom+=($item['custom_name']!==null||$item['custom_number']!==null?5000:0)*$item['quantity'];}return [$base,$custom,$base+$custom]; }
 function post(string $key): string { return trim((string)($_POST[$key]??'')); }
 function flash(string $message): void { $_SESSION['flash']=$message; }
 $page=(string)($_GET['page']??'home');$error='';
+if($page==='admin' && !current_user() && $_SERVER['REQUEST_METHOD']==='GET') redirect('login');
 try {
 if($_SERVER['REQUEST_METHOD']==='POST') {
  if(!hash_equals(token(),(string)($_POST['csrf']??''))) throw new RuntimeException('Form expired. Try again.');
@@ -66,6 +67,12 @@ if($_SERVER['REQUEST_METHOD']==='POST') {
 } catch(Throwable $ex) { $error=$ex instanceof PDOException?'Database error. Check the details and try again.':$ex->getMessage(); }
 try {$categories=db()->query('SELECT * FROM categories WHERE status=1 ORDER BY name')->fetchAll();$leagues=db()->query('SELECT * FROM leagues WHERE status=1 ORDER BY name')->fetchAll();$clubs=db()->query('SELECT * FROM clubs WHERE status=1 ORDER BY name')->fetchAll();}catch(Throwable $ex){http_response_code(500);exit('Database unavailable. Start MySQL in XAMPP and import database/schema.sql.');}
 $message=$_SESSION['flash']??'';unset($_SESSION['flash']);
+if($page==='admin' && is_admin()) {
+ include __DIR__.'/parts/admin-shell-start.php';
+ include __DIR__.'/parts/admin.php';
+ include __DIR__.'/parts/admin-shell-end.php';
+ exit;
+}
 ?><?php include __DIR__.'/parts/shell-start.php'; ?>
 <?php if($page==='home'): include __DIR__.'/parts/home.php'; ?>
 <?php elseif($page==='shop'):?><section class="wrap section"><div class="page-title"><span class="eyebrow">THE COLLECTION / ALL KITS</span><h1>Find your colors<span class="dot">.</span></h1><p>Matchday starts here. Explore your next favorite kit.</p></div><?php include __DIR__.'/parts/shop-filters.php'; ?><?php $sql='SELECT p.*,cl.name club,c.name category FROM products p JOIN clubs cl ON cl.id=p.club_id JOIN categories c ON c.id=p.category_id WHERE p.status=1';$args=[];if(trim((string)($_GET['q']??''))!==''){$sql.=' AND (p.name LIKE ? OR cl.name LIKE ?)';$search='%'.trim((string)$_GET['q']).'%';array_push($args,$search,$search);}foreach(['league'=>'cl.league_id','club'=>'p.club_id','category'=>'p.category_id'] as $key=>$column)if((int)($_GET[$key]??0)>0){$sql.=" AND $column=?";$args[]=(int)$_GET[$key];}$sql.=($_GET['sort']??'')==='new'?' ORDER BY p.id DESC':' ORDER BY p.is_featured DESC,p.id DESC';$s=db()->prepare($sql);$s->execute($args);$products=$s->fetchAll();?><p class="count"><?=count($products)?> KITS FOUND</p><div class="grid"><?php foreach($products as $product)include __DIR__.'/parts/card.php';?></div><?php if(!$products):?><div class="empty">No kits found. <a href="<?=path('shop')?>">Clear filters</a></div><?php endif;?></section>
