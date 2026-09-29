@@ -3,10 +3,9 @@
 .admin-icons{position:absolute;width:0;height:0;overflow:hidden}
 .admin-layout{display:grid;grid-template-columns:245px minmax(0,1fr);min-height:100vh;max-width:1920px;margin:auto;background:#f6f9fb;box-shadow:0 0 45px #1726380e}
 .admin-sidebar{display:flex;flex-direction:column;min-height:100vh;position:sticky;top:0;height:100vh;overflow:hidden;padding:25px 14px;background:#071421;color:#f8fafc}
-.admin-brand{display:flex;align-items:center;gap:7px;margin:0 14px 31px;font:700 25px 'Space Grotesk',sans-serif;letter-spacing:-1.6px;white-space:nowrap}
-.admin-brand-mark{width:43px;height:43px;flex:none}
-.admin-brand strong{color:#b7f43b}
-.admin-brand small{display:block;margin-top:-2px;font:700 8px 'DM Sans',sans-serif;letter-spacing:3.4px;text-align:center;color:#ccd8e1}
+.admin-brand{display:flex;flex-direction:column;align-items:center;gap:6px;margin:0 9px 26px;white-space:nowrap}
+.admin-brand-logo{display:block;width:100%;height:auto;padding:2px 5px;background:#fff;border-radius:10px}
+.admin-brand small{display:block;font:700 9px 'DM Sans',sans-serif;letter-spacing:3px;color:#ccd8e1}
 .admin-sidebar-label{margin:0 14px 13px;color:#74889a;font-size:10px;font-weight:800;letter-spacing:1.9px}
 .admin-side-nav{display:flex;flex-direction:column;gap:5px}
 .admin-side-nav a{display:flex;align-items:center;gap:13px;min-height:44px;padding:9px 13px;border:1px solid transparent;border-radius:10px;color:#d9e2ea;font-size:13px;font-weight:600;transition:background .18s,color .18s}
@@ -57,30 +56,20 @@
 .dash-metric-icon svg,.dash-panel-title svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .dash-metric span{color:#5d6c7b;font-size:11px;font-weight:700}.dash-metric strong{display:block;margin:5px 0 4px;font:700 clamp(18px,2vw,28px) 'Space Grotesk',sans-serif;letter-spacing:-1px;white-space:nowrap}.dash-metric small{color:#8a99a6;font-size:10px}
 .dash-metric .danger{color:#e13d42}
-.dash-main-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(260px,1fr);gap:12px;margin-bottom:12px}
 .dash-panel{min-width:0;padding:20px}
 .dash-panel-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
 .dash-panel-title>div{display:flex;align-items:center;gap:9px}.dash-panel-title h2{margin:0;font:700 16px 'Space Grotesk',sans-serif;letter-spacing:-.4px}.dash-panel-title>a{font-size:11px;font-weight:800;color:#51647a}.dash-panel-title>a:hover{color:#5b8b0f}
-.dash-sales-value{font:700 29px 'Space Grotesk',sans-serif;letter-spacing:-1px}.dash-sales-caption{margin-left:10px;color:#8290a0;font-size:11px}
-.dash-bars{display:flex;align-items:end;gap:4px;height:165px;margin:14px 0 7px;padding:8px 0 0;border-bottom:1px solid #dce6e9;background:repeating-linear-gradient(to top,transparent 0 38px,#eaf0f3 39px 40px)}
-.dash-bars span{flex:1;min-width:3px;height:max(5px,var(--bar-height));background:linear-gradient(0deg,#a6e633,#56b925);border-radius:4px 4px 0 0}.dash-bars span:hover{background:#152c41}
-.dash-chart-labels{display:flex;justify-content:space-between;color:#8795a5;font-size:10px}
-.dash-status-body{display:flex;align-items:center;gap:20px;min-height:185px}
-.dash-donut{position:relative;display:grid;place-items:center;width:155px;height:155px;flex:none;border-radius:50%;background:var(--donut)}
-.dash-donut:before{content:'';position:absolute;inset:28px;border-radius:50%;background:#fff}.dash-donut span{position:relative;text-align:center;font:700 20px 'Space Grotesk',sans-serif}.dash-donut small{display:block;font:500 10px 'DM Sans',sans-serif;color:#8a98a6}
-.dash-status-list{min-width:0;flex:1}.dash-status-list div{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid #ecf0f2;font-size:11px}.dash-status-list b{white-space:nowrap}.dash-status-list i{display:inline-block;width:9px;height:9px;margin-right:7px;border-radius:50%;background:var(--status-color)}
 .dash-bottom-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(260px,1fr);gap:12px;margin-bottom:12px}
 .dash-table{width:100%;border-collapse:collapse;font-size:11px}.dash-table th{text-align:left;padding:10px 8px;background:#f6f9fa;color:#607185;font-size:9px;letter-spacing:.6px;text-transform:uppercase}.dash-table td{padding:10px 8px;border-bottom:1px solid #edf1f3}.dash-table tr:last-child td{border-bottom:0}.dash-table td strong{font-weight:800}.dash-table a:hover{color:#5b8b0f}.dash-table .badge{padding:5px 8px;font-size:9px}
 .dash-stock-count{color:#e63238;font-weight:800}
 .dash-footer-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .dash-list-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #edf1f3;font-size:11px}.dash-list-row:last-child{border-bottom:0}.dash-list-row>span:last-child{margin-left:auto;color:#7c8d9d;text-align:right}.dash-list-row strong,.dash-list-row small{display:block}.dash-list-row small{margin-top:2px;color:#91a0ac}.dash-rank{display:grid;place-items:center;width:23px;height:23px;flex:none;border-radius:50%;background:#e9eef1;color:#586b7c;font-weight:800}
 .dash-product-thumb{width:40px;height:40px;flex:none;object-fit:contain;background:#f0f3f5;border-radius:8px}.dash-empty{padding:22px 4px;color:#8c9baa;font-size:12px;text-align:center}
-.dash-category-bar{width:100%;height:8px;margin-top:7px;border-radius:10px;background:#eaf0f2;overflow:hidden}.dash-category-bar i{display:block;height:100%;border-radius:10px;background:#9dde2a}
 .dash-table-scroll{width:100%;overflow-x:auto}.dash-table-scroll .dash-table{min-width:610px}
 .admin-section-intro{margin:-9px 0 18px;color:#7b8b99;font-size:12px}
 .admin-content .admin-row{flex-wrap:wrap}.admin-content .order-admin{grid-template-columns:minmax(0,1fr) auto auto}
 .admin-content .admin-select-options{z-index:30}
 @media(max-width:1200px){.dash-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.admin-topbar-actions{gap:9px}.admin-header-search{width:210px}}
-@media(max-width:950px){.admin-layout{grid-template-columns:190px minmax(0,1fr)}.admin-brand{font-size:20px;margin-left:7px}.admin-brand-mark{width:34px}.admin-side-nav a{font-size:11px;gap:9px}.admin-content .admin-columns{grid-template-columns:1fr}.dash-main-grid,.dash-bottom-grid{grid-template-columns:1fr}.admin-profile>span:last-child{display:none}.admin-header-search{width:170px}}
-@media(max-width:700px){.admin-layout{display:block}.admin-sidebar{position:relative;width:100%;height:auto;min-height:0;padding:12px}.admin-brand{margin:0 0 10px;font-size:21px}.admin-sidebar-label,.admin-sidebar-bottom{display:none}.admin-side-nav{flex-direction:row;overflow-x:auto;padding-bottom:2px}.admin-side-nav a{flex:none;min-height:37px;padding:7px 10px}.admin-side-nav svg{width:17px;height:17px}.admin-topbar{min-height:0;padding:16px;flex-wrap:wrap}.admin-topbar-heading p{display:none}.admin-topbar-actions{width:100%}.admin-header-search{width:auto;flex:1}.admin-content{padding:15px}.admin-flash{margin:12px 15px 0}.dash-status-body{flex-wrap:wrap}.dash-donut{width:135px;height:135px}.dash-footer-grid{grid-template-columns:1fr}.admin-content .order-admin{grid-template-columns:1fr}}
+@media(max-width:950px){.admin-layout{grid-template-columns:190px minmax(0,1fr)}.admin-brand{margin-left:4px;margin-right:4px}.admin-side-nav a{font-size:11px;gap:9px}.admin-content .admin-columns{grid-template-columns:1fr}.dash-bottom-grid{grid-template-columns:1fr}.admin-profile>span:last-child{display:none}.admin-header-search{width:170px}}
+@media(max-width:700px){.admin-layout{display:block}.admin-sidebar{position:relative;width:100%;height:auto;min-height:0;padding:12px}.admin-brand{width:180px;margin:0 0 10px}.admin-sidebar-label,.admin-sidebar-bottom{display:none}.admin-side-nav{flex-direction:row;overflow-x:auto;padding-bottom:2px}.admin-side-nav a{flex:none;min-height:37px;padding:7px 10px}.admin-side-nav svg{width:17px;height:17px}.admin-topbar{min-height:0;padding:16px;flex-wrap:wrap}.admin-topbar-heading p{display:none}.admin-topbar-actions{width:100%}.admin-header-search{width:auto;flex:1}.admin-content{padding:15px}.admin-flash{margin:12px 15px 0}.dash-footer-grid{grid-template-columns:1fr}.admin-content .order-admin{grid-template-columns:1fr}}
 @media(max-width:430px){.dash-metrics{gap:8px}.dash-metric{min-height:95px;padding:11px;gap:8px}.dash-metric-icon{width:34px;height:34px}.dash-metric-icon svg{width:17px}.dash-metric strong{font-size:18px}.dash-metric span{font-size:10px}.dash-panel{padding:15px}.dash-table{font-size:10px}.dash-table th,.dash-table td{padding:8px 4px}.admin-profile{padding-left:0;border:0}}
