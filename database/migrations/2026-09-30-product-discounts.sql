@@ -1,0 +1,2 @@
+ALTER TABLE products
+  ADD COLUMN discount_percent TINYINT UNSIGNED NOT NULL DEFAULT 0 AFTER base_price;
