@@ -18,6 +18,7 @@ $pendingOrders = (int)db()->query("SELECT COUNT(*) FROM orders WHERE order_statu
 </head>
 <body class="admin-body">
 <svg class="admin-icons" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <filter id="brand-on-dark" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="-0.6216 0 0 0 1.0366 -0.1689 0 0 0 1.0099 -1.3649 0 0 0 1.0803 0 0 0 1 0"/></filter>
   <symbol id="a-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
   <symbol id="a-shirt" viewBox="0 0 24 24"><path d="m7 3 5 2 5-2 5 4-3 5-2-1.4V22H7V10.6L5 12 2 7z"/></symbol>
   <symbol id="a-box" viewBox="0 0 24 24"><path d="m12 2 9 4.5v11L12 22l-9-4.5v-11zM3 6.5 12 11l9-4.5M12 11v11"/></symbol>
