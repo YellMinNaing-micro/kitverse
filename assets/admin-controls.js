@@ -140,3 +140,17 @@ if (editSelected) {
     }
   });
 }
+
+const discountInput = document.querySelector('[data-discount-input]');
+const priceInput = document.querySelector('input[name="base_price"]');
+const discountPreview = document.querySelector('[data-discount-preview]');
+if (discountInput && priceInput && discountPreview) {
+  const updateDiscountPreview = () => {
+    const base = Number(priceInput.value) || 0;
+    const percent = Math.min(90, Math.max(0, Number(discountInput.value) || 0));
+    const sale = Math.round(base * (100 - percent) / 100);
+    discountPreview.textContent = `Sale price: ${new Intl.NumberFormat('en-US').format(sale)} MMK`;
+  };
+  discountInput.addEventListener('input', updateDiscountPreview);
+  priceInput.addEventListener('input', updateDiscountPreview);
+}
