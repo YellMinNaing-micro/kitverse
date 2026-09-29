@@ -13,6 +13,7 @@
 </head>
 <body>
 <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <filter id="brand-on-dark" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="-0.6216 0 0 0 1.0366 -0.1689 0 0 0 1.0099 -1.3649 0 0 0 1.0803 0 0 0 1 0"/></filter>
   <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="7.2"/><path d="m16.2 16.2 5 5"/></symbol>
   <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="7.5" r="4"/><path d="M4.2 21v-2.1c0-3.3 3.1-5.3 7.8-5.3s7.8 2 7.8 5.3V21z"/></symbol>
   <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 8.4c0 4.9-8.8 11.3-8.8 11.3S3.2 13.3 3.2 8.4a4.9 4.9 0 0 1 8.8-2.9 4.9 4.9 0 0 1 8.8 2.9z"/></symbol>
