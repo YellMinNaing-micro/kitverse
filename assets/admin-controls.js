@@ -78,3 +78,20 @@ document.addEventListener('keydown', (event) => {
     menu.querySelector('summary').focus();
   });
 });
+
+const productImageInput = document.querySelector('[data-product-image]');
+const productImagePreview = document.querySelector('[data-image-preview]');
+if (productImageInput && productImagePreview) {
+  let previewUrl = null;
+  productImageInput.addEventListener('change', () => {
+    if (previewUrl) URL.revokeObjectURL(previewUrl);
+    previewUrl = null;
+    const file = productImageInput.files?.[0];
+    if (!file) return;
+    previewUrl = URL.createObjectURL(file);
+    const image = document.createElement('img');
+    image.src = previewUrl;
+    image.alt = 'Selected product image preview';
+    productImagePreview.replaceChildren(image);
+  });
+}
