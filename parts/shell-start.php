@@ -6,6 +6,8 @@
   <title>KitVerse | Wear the Match</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/mockup.css">
+  <link rel="stylesheet" href="assets/shop-filters.css">
+  <script src="assets/filters.js" defer></script>
 </head>
 <body>
 <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
