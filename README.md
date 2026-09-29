@@ -17,6 +17,8 @@ To create or reset a local admin login, run `C:\xampp\php\php.exe scripts\set_ad
 ## Features
 
 - Customer shop with search and league, club, and kit type filters
+- Responsive homepage inspired by the supplied KitVerse visual reference, with a mobile menu and featured jersey cards
+- Session wishlist and quick add buttons on product cards
 - Product sizes, stock, jersey personalization, guest cart, and account registration
 - Checkout with cash on delivery or manually confirmed digital payments
 - Order history and status tracking
