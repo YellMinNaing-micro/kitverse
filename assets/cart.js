@@ -15,18 +15,22 @@ if (cartPage) {
 
   function refreshTotals() {
     let subtotal = 0;
+    let savings = 0;
     let personalization = 0;
     rows().forEach((row) => {
       const quantity = Number(row.querySelector('[data-cart-quantity]').textContent);
       const unitPrice = Number(row.dataset.unitPrice);
+      const listPrice = Number(row.dataset.listPrice);
       const extra = Number(row.dataset.personalization);
-      subtotal += unitPrice * quantity;
+      subtotal += listPrice * quantity;
+      savings += (listPrice - unitPrice) * quantity;
       personalization += extra * quantity;
       row.querySelector('[data-line-total]').textContent = money((unitPrice + extra) * quantity);
     });
     cartPage.querySelector('[data-cart-subtotal]').textContent = money(subtotal);
+    cartPage.querySelector('[data-cart-savings]').textContent = `-${money(savings)}`;
     cartPage.querySelector('[data-cart-personalization]').textContent = money(personalization);
-    cartPage.querySelector('[data-cart-total]').textContent = money(subtotal + personalization);
+    cartPage.querySelector('[data-cart-total]').textContent = money(subtotal - savings + personalization);
   }
 
   function setQuantity(row, quantity) {
