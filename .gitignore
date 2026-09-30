@@ -13,6 +13,9 @@ config.local.php
 /cache/
 /.idea/
 /.vscode/
+/.codex-finalizer/
+/.codex-ppt-build/
+/output/KitVerse_Project_Summary.pptx
 
 # Local database dumps may contain personal data
 *.sql.gz
