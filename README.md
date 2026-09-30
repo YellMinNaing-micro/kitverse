@@ -8,7 +8,7 @@ Football jersey e-commerce project using PHP, MariaDB/MySQL, and XAMPP.
 2. Start Apache and MySQL in XAMPP.
 3. On a fresh installation only, import `database/schema.sql` in phpMyAdmin. This export drops and recreates its tables, so do not import it over an existing database with data you want to keep.
 4. Select `kitverse_db` in phpMyAdmin, then import `database/sample_catalog.sql` for example categories, leagues, clubs, products, and sizes. Import it only once into a fresh database.
-5. Open `http://localhost:8080/kitverse/` (or use your Apache port).
+5. Open `http://localhost/kitverse/` when Apache uses port 80. If Apache uses another port, include it in the URL (for example, `http://localhost:8080/kitverse/`).
 
 For an existing KitVerse database created before product discounts, import `database/migrations/2026-09-30-product-discounts.sql` once. Do not re-import `database/schema.sql` into an existing database; it drops tables.
 
