@@ -48,33 +48,23 @@ C:\xampp\php\php.exe scripts\set_admin_password.php
 
 ## Customer order flow
 
-```mermaid
-%%{init: {"theme": "dark", "themeVariables": {"background": "#111827", "primaryColor": "#1f2937", "primaryTextColor": "#f9fafb", "primaryBorderColor": "#60a5fa", "lineColor": "#cbd5e1", "secondaryColor": "#1f2937", "tertiaryColor": "#111827"}}}%%
-flowchart LR
-    A[Browse kits] --> B[Choose size & quantity]
-    B --> C[Add to cart]
-    C --> D[Register or log in]
-    D --> E[Enter delivery & payment]
-    E --> F{Stock available?}
-    F -- Yes --> G[Place order]
-    F -- No --> C
-    G --> H[Track order]
-```
+**Browse kits** → **ရွေးချယ်ပါ** (size၊ quantity၊ လိုလျှင် name/number) → **Cart ထဲထည့်ပါ** → **Register / Login** → **Delivery နှင့် payment ဖြည့်ပါ** → **Stock စစ်ပါ** → **Order တင်ပါ** → **Orders page မှ status ကြည့်ပါ**
 
-Diagram label များကို မြန်မာစာ font rendering ပြဿနာမဖြစ်စေရန် English ဖြင့်ရေးထားသည်။ Product ရွေးချိန်တွင် name/number personalization ထည့်နိုင်သည်။ Guest အနေဖြင့် cart ထဲထည့်နိုင်သော်လည်း checkout လုပ်ရန် account လိုသည်။ Order တင်ချိန်တွင် stock ကို ထပ်စစ်ပြီး database transaction အတွင်း order၊ order items၊ payment record သိမ်း၊ stock လျော့၊ cart ရှင်းသည်။ Order နှင့် payment status တို့သည် အစတွင် `pending` ဖြစ်သည်။
+| Stock စစ်သည့်ရလဒ် | နောက်တစ်ဆင့် |
+| --- | --- |
+| လုံလောက်သည် | Order၊ order items နှင့် payment record သိမ်းပြီး stock လျော့၊ cart ရှင်းမည်။ |
+| မလုံလောက်ပါ | Cart ကိုပြန်စစ်ပြီး quantity သို့မဟုတ် size ပြင်ရမည်။ |
+
+Guest အနေဖြင့် cart ထဲထည့်နိုင်သော်လည်း checkout လုပ်ရန် account လိုသည်။ Order တင်ချိန်တွင် stock ကို ထပ်စစ်ပြီး database transaction အတွင်း အထက်ပါအဆင့်များကို လုပ်ဆောင်သည်။ Order နှင့် payment status တို့သည် အစတွင် `pending` ဖြစ်သည်။
 
 ## Admin flow
 
-```mermaid
-%%{init: {"theme": "dark", "themeVariables": {"background": "#111827", "primaryColor": "#1f2937", "primaryTextColor": "#f9fafb", "primaryBorderColor": "#60a5fa", "lineColor": "#cbd5e1", "secondaryColor": "#1f2937", "tertiaryColor": "#111827"}}}%%
-flowchart LR
-    A[Admin login] --> B[Dashboard]
-    B --> C[Manage catalog & products]
-    C --> D[Set sizes, prices & stock]
-    B --> E[Review orders]
-    E --> F[Update order status]
-    F --> G[Save status history]
-```
+**Admin login** → **Dashboard**
+
+| Dashboard မှလုပ်ဆောင်ချက် | Flow |
+| --- | --- |
+| Catalog နှင့် products | Category / league / club စီမံ → product၊ discount၊ image ပြင် → size၊ price၊ stock သတ်မှတ် |
+| Orders | Order ကြည့် → status ပြောင်း → status history သိမ်း |
 
 Admin သည် `pending → confirmed → processing → packed → shipped → delivered` သို့မဟုတ် `cancelled` status များကို ရွေးပြောင်းနိုင်သည်။ Dashboard တွင် orders၊ sales value၊ customers နှင့် low stock အချက်အလက်များကို ပြထားသည်။
 
