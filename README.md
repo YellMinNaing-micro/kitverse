@@ -1,33 +1,123 @@
 # KitVerse
 
-Football jersey e-commerce project using PHP, MariaDB/MySQL, and XAMPP.
+KitVerse သည် football jersey များကို ရှာဖွေ၊ ရွေးချယ်၊ မှာယူနိုင်သည့် PHP နှင့် MariaDB/MySQL အခြေပြု e-commerce project ဖြစ်သည်။ Customer storefront နှင့် role ကန့်သတ်ထားသော admin dashboard ပါဝင်ပြီး XAMPP ဖြင့် local တွင် run နိုင်သည်။
+
+## အဓိကလုပ်ဆောင်ချက်များ
+
+| Customer | Admin |
+| --- | --- |
+| Product ရှာဖွေခြင်း၊ league/club/kit type ဖြင့် filter လုပ်ခြင်း | Sales၊ orders၊ customers၊ inventory overview ကြည့်ခြင်း |
+| Product size၊ stock၊ discount ကြည့်ခြင်း | Category၊ league၊ club၊ product စီမံခြင်း |
+| Session wishlist၊ guest cart၊ jersey name/number ထည့်ခြင်း | Size၊ SKU၊ stock နှင့် price override ပြင်ခြင်း |
+| Account ဖွင့်ခြင်း၊ checkout၊ order history ကြည့်ခြင်း | Order status ပြောင်းခြင်း၊ product image တင်ခြင်း |
+
+Checkout တွင် cash on delivery, KBZPay, WavePay နှင့် AYA Pay ကို ရွေးနိုင်သည်။ Digital payment များသည် manual confirmation အတွက်ဖြစ်ပြီး payment gateway အလိုအလျောက်ချိတ်ဆက်ထားခြင်း မရှိပါ။ စျေးနှုန်းများကို MMK ဖြင့်ပြထားသည်။ Product discount သည် 0–90% ဖြစ်နိုင်ပြီး jersey personalization ထည့်လျှင် တစ်ထည်လျှင် 5,000 MMK ထပ်ပေါင်းသည်။
+
+## အသုံးပြုထားသော နည်းပညာ
+
+- PHP 8+ (PDO MySQL, sessions)
+- MariaDB/MySQL
+- HTML, CSS, JavaScript
+- XAMPP (Apache + MySQL) အတွက် local setup
+
+Composer သို့မဟုတ် npm install အဆင့် မလိုပါ။
 
 ## Local setup
 
-1. Put this repository in `C:\xampp\htdocs\kitverse`.
-2. Start Apache and MySQL in XAMPP.
-3. On a fresh installation only, import `database/schema.sql` in phpMyAdmin. This export drops and recreates its tables, so do not import it over an existing database with data you want to keep.
-4. Select `kitverse_db` in phpMyAdmin, then import `database/sample_catalog.sql` for example categories, leagues, clubs, products, and sizes. Import it only once into a fresh database.
-5. Open `http://localhost/kitverse/` when Apache uses port 80. If Apache uses another port, include it in the URL (for example, `http://localhost:8080/kitverse/`).
+1. Repository ကို `C:\xampp\htdocs\kitverse` တွင်ထားပါ။
+2. XAMPP Control Panel မှ Apache နှင့် MySQL ကို start လုပ်ပါ။
+3. **Database အသစ်တည်ဆောက်မည့်အခါမှသာ** phpMyAdmin တွင် `database/schema.sql` ကို import လုပ်ပါ။ ဤ file သည် `kitverse_db` ကို ဖန်တီးပြီး table များကို drop/recreate လုပ်သောကြောင့် ရှိပြီးသား data အပေါ် ထပ်မတင်ပါနှင့်။
+4. phpMyAdmin တွင် `kitverse_db` ကိုရွေးပြီး `database/sample_catalog.sql` ကို **တစ်ကြိမ်သာ** import လုပ်ပါ။ Sample catalog တွင် categories, leagues, clubs, products နှင့် sizes ပါဝင်သည်။
+5. Browser တွင် [http://localhost/kitverse/](http://localhost/kitverse/) ကိုဖွင့်ပါ။ Apache port ကိုပြောင်းထားလျှင် URL တွင် port ထည့်ပါ (ဥပမာ `http://localhost:8080/kitverse/`)။
 
-For an existing KitVerse database created before product discounts, import `database/migrations/2026-09-30-product-discounts.sql` once. Do not re-import `database/schema.sql` into an existing database; it drops tables.
+Database account သည် ပုံမှန်အားဖြင့် user `root`၊ password အလွတ်ကိုသုံးသည်။ ကိုယ့်စက်၏ MySQL credentials မတူလျှင် Apache/PHP environment တွင် `KITVERSE_DB_USER` နှင့် `KITVERSE_DB_PASS` ကိုသတ်မှတ်ပါ။ Connection setting ကို `index.php` နှင့် `bootstrap.php` တွင်ဖတ်နိုင်သည်။
 
-`database/schema.sql` defines the database and its 11 tables. The sample catalog contains no users, orders, cart items, or payment records. Do not commit real customer data or credentials.
+### ရှိပြီးသား database ကို update လုပ်ရန်
 
-To create or reset a local admin login, run `C:\xampp\php\php.exe scripts\set_admin_password.php` from this folder. Enter an admin email and password when prompted. Keep the password private.
+Discount feature မပါသေးသော ယခင် KitVerse database အတွက် `database/migrations/2026-09-30-product-discounts.sql` ကို တစ်ကြိမ် import လုပ်ပါ။ Data ရှိပြီးသား database တွင် `schema.sql` ကို ထပ် import မလုပ်ပါနှင့်။
 
-## Features
+### Admin account ဖန်တီးရန်
 
-- Customer shop with search and league, club, and kit type filters
-- Club browsing, five latest arrivals, and a sale view driven by product discounts
-- Responsive homepage inspired by the supplied KitVerse visual reference, with a mobile menu and featured jersey cards
-- Session wishlist and quick add buttons on product cards
-- Product sizes, stock, jersey personalization, guest cart, and account registration
-- Checkout with cash on delivery or manually confirmed digital payments
-- Order history and status tracking
-- Admin product, size, stock, category, league, club, and order management
-- Product discounts from 0 to 90%, applied to cart and checkout prices
-- Separate role-protected admin dashboard with sales, orders, customers, inventory, and payment views
-- Admin product image upload and replacement: JPG, PNG or WebP, up to 8 MB, saved under `assets/images/{productId}/`
+Project folder ထဲတွင် terminal ဖွင့်ပြီး အောက်ပါ command ကို run ပါ။ Email နှင့် အနည်းဆုံး စာလုံး 8 လုံးပါသော password ကို prompt တွင်ဖြည့်ပါ။ ရှိပြီးသား email ကိုထည့်လျှင် ထို account ၏ password နှင့် admin role ကို update လုပ်မည်။
 
-The generated hero and product concept images are under `assets/`. They are original visual placeholders for the sample catalog; they do not represent official club merchandise. Add your product photos through Admin → Products. Editing a product without choosing a new image keeps its current image; choosing a new one replaces it. Uploaded images are project files under `assets/images/`, so include them when deploying or backing up the catalog.
+```powershell
+C:\xampp\php\php.exe scripts\set_admin_password.php
+```
+
+ထို့နောက် `?page=login` မှ sign in လုပ်ပါ။ Admin dashboard သို့ login ပြီးနောက် ဝင်နိုင်သည်။
+
+## Customer order flow
+
+```mermaid
+flowchart TD
+    A[Home / Shop / Clubs] --> B[Product ကိုရွေး]
+    B --> C[Size နှင့် quantity ရွေး]
+    C --> D{Personalization လိုသလား?}
+    D -- လို --> E[Name / number ဖြည့်]
+    D -- မလို --> F[Cart ထဲထည့်]
+    E --> F
+    F --> G[Cart ကိုစစ်ပြီး checkout]
+    G --> H{Login ဝင်ထားသလား?}
+    H -- မဝင်သေး --> I[Register / Login]
+    I --> J[Delivery နှင့် payment method ဖြည့်]
+    H -- ဝင်ထား --> J
+    J --> K{Stock လုံလောက်သလား?}
+    K -- မလုံလောက် --> G
+    K -- လုံလောက် --> L[Order၊ items၊ payment record သိမ်း]
+    L --> M[Stock လျော့၊ cart ရှင်း]
+    M --> N[Orders page မှ status ကြည့်]
+```
+
+Guest အနေဖြင့် cart ထဲထည့်နိုင်သော်လည်း checkout လုပ်ရန် account လိုသည်။ Order တင်ချိန်တွင် stock ကို ထပ်စစ်ပြီး database transaction အတွင်း order သိမ်း၊ stock လျော့၊ cart ရှင်းသည်။ Order နှင့် payment status တို့သည် အစတွင် `pending` ဖြစ်သည်။
+
+## Admin flow
+
+```mermaid
+flowchart LR
+    A[Admin login] --> B[Dashboard]
+    B --> C[Catalog: categories / leagues / clubs]
+    C --> D[Products: price / discount / image]
+    D --> E[Variants: size / SKU / stock]
+    B --> F[Orders ကိုကြည့်]
+    F --> G[Order status ပြောင်း]
+    G --> H[Status history သိမ်း]
+```
+
+Admin သည် `pending → confirmed → processing → packed → shipped → delivered` သို့မဟုတ် `cancelled` status များကို ရွေးပြောင်းနိုင်သည်။ Dashboard တွင် orders၊ sales value၊ customers နှင့် low stock အချက်အလက်များကို ပြထားသည်။
+
+## Project structure
+
+```text
+kitverse/
+├── index.php                  # Routes, form actions, authentication, cart/admin logic
+├── bootstrap.php              # CLI script အတွက် database connection
+├── parts/                     # Storefront, checkout, orders, admin page components
+│   ├── checkout-action.php    # Order transaction နှင့် stock update
+│   └── product-image-upload.php
+├── assets/                    # CSS, JavaScript, concept images, uploaded product images
+│   └── images/{productId}/    # Admin မှ တင်ထားသော product photos
+├── database/
+│   ├── schema.sql             # Fresh install schema
+│   ├── sample_catalog.sql     # Demo catalog
+│   └── migrations/            # Existing database updates
+└── scripts/
+    └── set_admin_password.php # CLI admin account setup/reset
+```
+
+`index.php?page=...` ပုံစံဖြင့် page များကို route လုပ်ထားသည်။ အဓိက page များမှာ `home`, `shop`, `clubs`, `product`, `wishlist`, `cart`, `login`, `register`, `checkout`, `orders` နှင့် `admin` ဖြစ်သည်။ Database schema တွင် table 11 ခုရှိပြီး catalog (`categories`, `leagues`, `clubs`, `products`, `product_variants`), accounts/cart (`users`, `cart_items`) နှင့် orders (`orders`, `order_items`, `payments`, `order_status_history`) ကို သိမ်းထားသည်။
+
+## Product images နှင့် data သတိပြုရန်
+
+- Admin → Products မှ JPG, PNG, WebP (အများဆုံး 8 MB) image တင်နိုင်သည်။ Image အသစ်မရွေးဘဲ product ပြင်လျှင် လက်ရှိ image ကို ဆက်သုံးမည်။
+- Upload များကို `assets/images/{productId}/` တွင်သိမ်းသည်။ Deploy သို့မဟုတ် backup လုပ်လျှင် ထို folder ကိုပါထည့်ပါ။
+- `assets/` ထဲရှိ hero နှင့် sample jersey concept images များသည် demo visuals ဖြစ်ပြီး တရားဝင် club merchandise ပုံများ မဟုတ်ပါ။
+- Sample catalog တွင် user၊ order၊ cart item၊ payment record မပါပါ။ Customer data နှင့် credentials အစစ်များကို repository ထဲ မထည့်ပါနှင့်။
+
+## ပြဿနာဖြေရှင်းရန်
+
+| လက္ခဏာ | စစ်ရန် |
+| --- | --- |
+| `Database unavailable` | XAMPP MySQL run နေသလား၊ `kitverse_db` import ပြီးပြီလား၊ DB credentials မှန်သလား |
+| Site မဖွင့်နိုင် | Apache run နေသလား၊ project သည် `htdocs/kitverse` ထဲတွင်ရှိသလား၊ Apache port မှန်သလား |
+| Product မပေါ် | `sample_catalog.sql` ကို fresh database ထဲ import ပြီးပြီလား |
+| Admin ဝင်မရ | CLI script ဖြင့် admin email/password ပြန်သတ်မှတ်ပြီး active account ဖြင့် login လုပ်ပါ |
