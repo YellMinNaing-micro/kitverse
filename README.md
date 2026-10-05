@@ -49,38 +49,31 @@ C:\xampp\php\php.exe scripts\set_admin_password.php
 ## Customer order flow
 
 ```mermaid
-flowchart TD
-    A[Home / Shop / Clubs] --> B[Product ကိုရွေး]
-    B --> C[Size နှင့် quantity ရွေး]
-    C --> D{Personalization လိုသလား?}
-    D -- လို --> E[Name / number ဖြည့်]
-    D -- မလို --> F[Cart ထဲထည့်]
-    E --> F
-    F --> G[Cart ကိုစစ်ပြီး checkout]
-    G --> H{Login ဝင်ထားသလား?}
-    H -- မဝင်သေး --> I[Register / Login]
-    I --> J[Delivery နှင့် payment method ဖြည့်]
-    H -- ဝင်ထား --> J
-    J --> K{Stock လုံလောက်သလား?}
-    K -- မလုံလောက် --> G
-    K -- လုံလောက် --> L[Order၊ items၊ payment record သိမ်း]
-    L --> M[Stock လျော့၊ cart ရှင်း]
-    M --> N[Orders page မှ status ကြည့်]
+%%{init: {"theme": "dark", "themeVariables": {"background": "#111827", "primaryColor": "#1f2937", "primaryTextColor": "#f9fafb", "primaryBorderColor": "#60a5fa", "lineColor": "#cbd5e1", "secondaryColor": "#1f2937", "tertiaryColor": "#111827"}}}%%
+flowchart LR
+    A[Browse kits] --> B[Choose size & quantity]
+    B --> C[Add to cart]
+    C --> D[Register or log in]
+    D --> E[Enter delivery & payment]
+    E --> F{Stock available?}
+    F -- Yes --> G[Place order]
+    F -- No --> C
+    G --> H[Track order]
 ```
 
-Guest အနေဖြင့် cart ထဲထည့်နိုင်သော်လည်း checkout လုပ်ရန် account လိုသည်။ Order တင်ချိန်တွင် stock ကို ထပ်စစ်ပြီး database transaction အတွင်း order သိမ်း၊ stock လျော့၊ cart ရှင်းသည်။ Order နှင့် payment status တို့သည် အစတွင် `pending` ဖြစ်သည်။
+Diagram label များကို မြန်မာစာ font rendering ပြဿနာမဖြစ်စေရန် English ဖြင့်ရေးထားသည်။ Product ရွေးချိန်တွင် name/number personalization ထည့်နိုင်သည်။ Guest အနေဖြင့် cart ထဲထည့်နိုင်သော်လည်း checkout လုပ်ရန် account လိုသည်။ Order တင်ချိန်တွင် stock ကို ထပ်စစ်ပြီး database transaction အတွင်း order၊ order items၊ payment record သိမ်း၊ stock လျော့၊ cart ရှင်းသည်။ Order နှင့် payment status တို့သည် အစတွင် `pending` ဖြစ်သည်။
 
 ## Admin flow
 
 ```mermaid
+%%{init: {"theme": "dark", "themeVariables": {"background": "#111827", "primaryColor": "#1f2937", "primaryTextColor": "#f9fafb", "primaryBorderColor": "#60a5fa", "lineColor": "#cbd5e1", "secondaryColor": "#1f2937", "tertiaryColor": "#111827"}}}%%
 flowchart LR
     A[Admin login] --> B[Dashboard]
-    B --> C[Catalog: categories / leagues / clubs]
-    C --> D[Products: price / discount / image]
-    D --> E[Variants: size / SKU / stock]
-    B --> F[Orders ကိုကြည့်]
-    F --> G[Order status ပြောင်း]
-    G --> H[Status history သိမ်း]
+    B --> C[Manage catalog & products]
+    C --> D[Set sizes, prices & stock]
+    B --> E[Review orders]
+    E --> F[Update order status]
+    F --> G[Save status history]
 ```
 
 Admin သည် `pending → confirmed → processing → packed → shipped → delivered` သို့မဟုတ် `cancelled` status များကို ရွေးပြောင်းနိုင်သည်။ Dashboard တွင် orders၊ sales value၊ customers နှင့် low stock အချက်အလက်များကို ပြထားသည်။
