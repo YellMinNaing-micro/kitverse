@@ -22,6 +22,10 @@ Checkout တွင် cash on delivery, KBZPay, WavePay နှင့် AYA Pay 
 
 Composer သို့မဟုတ် npm install အဆင့် မလိုပါ။
 
+## Continuous integration (CI)
+
+GitHub Actions သည် `main` branch ကို push လုပ်သည့်အခါနှင့် `main` သို့ pull request တင်သည့်အခါ `.github/workflows/ci.yml` ကို run မည်။ CI တွင် PHP file အားလုံး၏ syntax၊ JavaScript syntax နှင့် commit whitespace ကိုစစ်သည်။ ထို့ပြင် fresh MariaDB ထဲ `schema.sql` နှင့် `sample_catalog.sql` ကို import လုပ်ပြီး application ၏ PDO connection၊ table 11 ခုနှင့် sample products ရှိမှုကို smoke test လုပ်သည်။
+
 ## Local setup
 
 1. Repository ကို `C:\xampp\htdocs\kitverse` တွင်ထားပါ။
