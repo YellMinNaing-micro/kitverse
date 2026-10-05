@@ -87,4 +87,4 @@ jobs:
           KITVERSE_DB_USER: root
           KITVERSE_DB_PASS: root
         run: |
-          php -r 'require "bootstrap.php"; $tables = (int) db()->query("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = DATABASE()")->fetchColumn(); $products = (int) db()->query("SELECT COUNT(*) FROM products")->fetchColumn(); if ($tables !== 11 || $products < 1) { fwrite(STDERR, "Unexpected schema or empty sample catalog\n"); exit(1); } echo "Database ready: $tables tables, $products products\n";'
+          php -r 'require "bootstrap.php"; $tables = (int) db()->query("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = DATABASE()")->fetchColumn(); $products = (int) db()->query("SELECT COUNT(*) FROM products")->fetchColumn(); $discounts = (int) db()->query("SELECT COUNT(*) FROM products WHERE discount_percent = 0")->fetchColumn(); if ($tables !== 11 || $products !== 14 || $discounts !== $products) { fwrite(STDERR, "Unexpected schema or sample catalog\n"); exit(1); } echo "Database ready: $tables tables, $products products\n";'
