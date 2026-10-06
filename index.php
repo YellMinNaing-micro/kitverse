@@ -1,7 +1,8 @@
 <?php
 declare(strict_types=1);
+require_once __DIR__ . '/db-config.php';
 session_start();
-function db(): PDO { static $pdo; return $pdo ??= new PDO('mysql:host=127.0.0.1;dbname=kitverse_db;charset=utf8mb4', getenv('KITVERSE_DB_USER') ?: 'root', getenv('KITVERSE_DB_PASS') ?: '', [PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_DEFAULT_FETCH_MODE=>PDO::FETCH_ASSOC]); }
+function db(): PDO { static $pdo; $config=db_config(); return $pdo ??= new PDO('mysql:host='.$config['host'].';dbname='.$config['name'].';charset=utf8mb4', $config['user'], $config['password'], [PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_DEFAULT_FETCH_MODE=>PDO::FETCH_ASSOC]); }
 function e($v): string { return htmlspecialchars((string)$v, ENT_QUOTES|ENT_SUBSTITUTE, 'UTF-8'); }
 function price($v): string { return number_format((float)$v).' MMK'; }
 function discounted_price($amount, $percent): float { return round((float)$amount * (100 - (int)$percent) / 100); }

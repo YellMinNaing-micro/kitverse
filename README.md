@@ -28,6 +28,9 @@ GitHub Actions သည် `main` branch ကို push လုပ်သည့်�
 
 ## Local setup
 
+Local database settings are the defaults in `db-config.php` (`127.0.0.1`, `kitverse_db`, `root`, blank password). For a different local account, set `KITVERSE_DB_HOST`, `KITVERSE_DB_NAME`, `KITVERSE_DB_USER`, and `KITVERSE_DB_PASS` in the PHP environment. On `kitverse.site.je`, `config.local.php` overrides these values. That file is ignored by Git and must be uploaded separately to the hosting account.
+
+
 1. Repository ကို `C:\xampp\htdocs\kitverse` တွင်ထားပါ။
 2. XAMPP Control Panel မှ Apache နှင့် MySQL ကို start လုပ်ပါ။
 3. **Database အသစ်တည်ဆောက်မည့်အခါမှသာ** phpMyAdmin တွင် `database/schema.sql` ကို import လုပ်ပါ။ ဤ file သည် `kitverse_db` ကို ဖန်တီးပြီး table များကို drop/recreate လုပ်သောကြောင့် ရှိပြီးသား data အပေါ် ထပ်မတင်ပါနှင့်။

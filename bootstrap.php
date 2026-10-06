@@ -1,13 +1,16 @@
 <?php
 declare(strict_types=1);
 
+require_once __DIR__ . '/db-config.php';
+
 function db(): PDO
 {
     static $pdo;
+    $config = db_config();
     return $pdo ??= new PDO(
-        'mysql:host=127.0.0.1;dbname=kitverse_db;charset=utf8mb4',
-        getenv('KITVERSE_DB_USER') ?: 'root',
-        getenv('KITVERSE_DB_PASS') ?: '',
+        'mysql:host=' . $config['host'] . ';dbname=' . $config['name'] . ';charset=utf8mb4',
+        $config['user'],
+        $config['password'],
         [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
     );
 }
